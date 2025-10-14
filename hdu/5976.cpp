@@ -11,8 +11,7 @@ int main() {
     cin >> _;
     while (_--) {
         long long n;
-        cout << "Case #" << _ << ": ";
-        n = _;
+        cin >> n;
         if (n < 5) {
             cout << n << "\n";
             continue;
