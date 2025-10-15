@@ -2,4 +2,5 @@
 bin/
 *.exe
 .vscode/
-/duipai/
+duipai/ans.cpp
+duipai/test.cpp
