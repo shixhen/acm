@@ -51,6 +51,10 @@ void solve() {
             cout << "0\n";
             return;
         }
+        if (a[i] > n) {
+            cout << "0\n";
+            return;
+        }
         s.insert(a[i]);
         if (a[i] != -1 && a[i] != 0) {
             if (a[a[i]] != i && a[a[i]] != -1) {
@@ -83,7 +87,7 @@ void solve() {
         //cout << i << " " << k << "\n";
         //cout << C(cnt - 1, i) * pow2[cnt - i - 1] % mod + mod % mod << "\n";
         if (a[n] == -1 && i < cnt)
-            k = k - C(cnt - 1, i) * fac[i] % mod * inv2[i / 2] % mod * ifac[i / 2] % mod * pow2[cnt - i - 1] % mod + mod % mod;
+            k = (k - C(cnt - 1, i) * fac[i] % mod * inv2[i / 2] % mod * ifac[i / 2] % mod * pow2[cnt - i - 1] % mod + mod) % mod;
         //cout << i << " " << k << "\n";
         ans = ((ans + k) % mod);
     }
