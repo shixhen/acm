@@ -23,7 +23,7 @@ int main() {
     
     for (int i = 1; i <= n; i++) {
         for (auto &x : g[i]) {
-            //cout << "Checking " << i << " " << x << "\n";
+            cout << "Checking " << i << " " << x << "\n";
             bool f = true;
             for (int k = 1; k <= n; k++) {
                 if (k == i || k == x) continue;
