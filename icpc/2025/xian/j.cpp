@@ -6,20 +6,19 @@ void solve() {
     int n, m;
     cin >> n >> m;
     vector<long long> c(n + 1);
+    vector<vector<int>> edge(n + 1, vector<int>());
+    vector<int> dep(n + 1);
+    vector<vector<int>> f(n + 1, vector<int> (20));
+    vector<vector<long long>> co(n + 1, vector<long long> (20));
+    vector<long long> s(n + 1);
     for (int i = 1; i <= n; i++) {
         cin >> c[i];
     }
-    vector<vector<int>> edge(n + 1, vector<int>());
     for (int i = 1, u, v; i < n; i++) {
         cin >> u >> v;
         edge[u].push_back(v);
         edge[v].push_back(u);
     }
-    
-    vector<int> dep(n + 1);
-    vector<vector<int>> f(n + 1, vector<int> (20));
-    vector<vector<long long>> co(n + 1, vector<long long> (20));
-    vector<long long> s(n + 1);
     function<void(int, int)> dfs = [&] (int u, int fa) {
         dep[u] = dep[fa] + 1;
         f[u][0] = fa;
@@ -58,7 +57,6 @@ void solve() {
                 ans += co[x][j];
                 x = f[x][j];
                 //cout << x << endl;
-                
             }
         }
         if (x != y) {
@@ -69,7 +67,6 @@ void solve() {
     }
     return;
 }
-
 
 int main() {
     ios::sync_with_stdio(0);
