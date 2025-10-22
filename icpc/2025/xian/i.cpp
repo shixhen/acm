@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 int a[2005][2005];
 vector<int> g[2005];
 
