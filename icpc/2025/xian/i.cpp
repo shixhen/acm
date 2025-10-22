@@ -11,6 +11,7 @@ int main() {
     cin.tie(0), cout.tie(0);
     int n;
     cin >> n;
+    vector<int> v;
     for (int i = 1; i <= n; i++) {
         for (int j = i; j <= n; j++) {
             cin >> a[i][j];
@@ -18,14 +19,17 @@ int main() {
             if (a[i][j] == (i ^ j)) {
                 g[i].push_back(j);
             }
+            if (a[i][j] == 0) {
+                v.push_back(i);
+                v.push_back(j);
+            }
         }
     }
-    
+    int cnt = 0;
     for (int i = 1; i <= n; i++) {
         for (auto &x : g[i]) {
-            cout << "Checking " << i << " " << x << "\n";
             bool f = true;
-            for (int k = 1; k <= n; k++) {
+            for (auto &k : v) {
                 if (k == i || k == x) continue;
                 if ((a[i][k] ^ a[k][x] ^ a[i][x]) == k) {
                     f = false;
@@ -34,6 +38,8 @@ int main() {
             }
             if (f) {
                 cout << i << " " << x << "\n";
+                cnt++;
+                if (cnt == n - 1) return 0;
             }
         }
     }

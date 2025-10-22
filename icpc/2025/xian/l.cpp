@@ -15,15 +15,18 @@ void solve() {
     sort(a.begin() + 1, a.end());
     int l = 1;
     for (int r = n; r >= 1; r--) {
+        if (r - 1 <= l) break;
         while (sum - a[r] > a[r]) {
             ans[r - l + 1] = sum;
             sum -= a[l];
             l++;
             if (r - 1 <= l) break;
         }
-        if (r - 1 <= l) break;
         sum -= a[r];
-        if (l > 1) l--;
+        if (l > 1) {
+            l--;
+            sum += a[l];
+        }
     }
     for (int i = 1; i <= n; i++) {
         cout << ans[i] << " \n"[i == n];

@@ -18,14 +18,14 @@ int main() {
         if (ans_max >= a[i]) {
             ans_max++;
         } else {
-            break;
+            ans_max--;
         }
     }
     for (int i = n - 1; i >= 0; i--) {
         if (ans_min < a[i]) {
             ans_min--;
         } else {
-            break;
+            ans_min++;
         }
     }
     cout << ans_max << " " << ans_min << "\n";
