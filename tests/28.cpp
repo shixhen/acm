@@ -18,8 +18,6 @@ int howManyBits(int x) {
     x = x >> bit1;
     bit0 = x;
     return bit16 + bit8 + bit4 + bit2 + bit1 + bit0 + 1;
-	
-
 }
 int main() {
     ios::sync_with_stdio(0);
