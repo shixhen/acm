@@ -29,7 +29,6 @@ int main() {
     }
     while (!q.empty()) {
         auto [now, u, d] = q.front();
-        //cout << u << " " << d << "\n";
         q.pop();
         for (auto &to : edge[now]) {
             if (vis[to] || v[to] == u) continue;

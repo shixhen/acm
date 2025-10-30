@@ -1,38 +1,99 @@
-/* howManyBits - return the minimum number of bits required to represent x in
- *             two's complement
- *  Examples: howManyBits(12) = 5
- *            howManyBits(298) = 10
- *            howManyBits(-5) = 4
- *            howManyBits(0)  = 1
- *            howManyBits(-1) = 1
- *            howManyBits(0x80000000) = 32
- *  Legal ops: ! ~ & ^ | + << >>
- *  Max ops: 90
- *  Rating: 4
- */
-int howManyBits(int x) {
-  /********* Begin *********/
-    int sign = x >> 31;
-    x = (sign & ~x) | (~sign & x);
-    int bit16, bit8, bit4, bit2, bit1, bit0;
-    bit16 = !!(x >> 16) << 4;
-    x = x >> bit16;
-    bit8 = !!(x >> 8) << 3;
-    x = x >> bit8;
-    bit4 = !!(x >> 4) << 2;
-    x = x >> bit4;
-    bit2 = !!(x >> 2) << 1;
-    x = x >> bit2;
-    bit1 = !!(x >> 1);
-    x = x >> bit1;
-    bit0 = x;
-    return bit16 + bit8 + bit4 + bit2 + bit1 + bit0 + 1;
-	
-  /********* End *********/
-  //请在下面/* */之间区域写下你的解题思路
-  /* 
-  姓名name：张三
-  学号No：123456
-  思路problem-solving ideas: 通过逐步右移x并检查每一位，计算出表示x所需的最小位数。
- */
+#include <bits/stdc++.h>
+#define N 200005
+using namespace std;
+using ll = long long;
+
+int n;
+
+int a[105][300];
+int b[105][300];
+
+bool check(int x, int y) {
+    if (x <= 0 || x > n || y <= 0 || y > 2 * x - 1 || b[x][y] > 0) return false;
+    return true;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1, x; j <= 2 * i - 1; j++) {
+            cin >> a[i][j];
+            a[i][j]--;
+        }
+    }
+    int ex, ey;
+    cin >> ex >> ey;
+    queue<array<int, 2>> q;
+    b[1][1] = 1;
+    q.push({1, 1});
+    while (q.size()) {
+        auto [x, y] = q.front();
+        q.pop();
+        // cout << x << " " << y << endl;
+        if (x == ex && y == ey) {
+            cout << b[x][y] - 1 << "\n";
+            return 0;
+        }
+        int tx, ty;
+        if (x % 2) {
+            tx = x;
+            ty = y + 1;
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 3) % 4) {
+                b[tx][ty] = b[x][y] + 1;
+                q.push({tx, ty});
+            }
+            ty = y - 1;
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 1) % 4) {
+                b[tx][ty] = b[x][y] + 1;
+                q.push({tx, ty});
+            }
+            if (a[x][y] % 2) {
+                tx = x + 1;
+                ty = y + 1;
+                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
+                    b[tx][ty] = b[x][y] + 1;
+                    q.push({tx, ty});
+                }
+                tx = x - 1;
+                ty = y - 1;
+                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
+                    b[tx][ty] = b[x][y] + 1;
+                    q.push({tx, ty});
+                }
+            }
+        } else {
+            tx = x;
+            ty = y + 1;
+
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 1) % 4) {
+                b[tx][ty] = b[x][y] + 1;
+                q.push({tx, ty});
+            }
+            ty = y - 1;
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 3) % 4) {
+                b[tx][ty] = b[x][y] + 1;
+                q.push({tx, ty});
+            }
+            if (a[x][y] % 2 == 0) {
+                tx = x + 1;
+                ty = y + 1;
+
+                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
+                    b[tx][ty] = b[x][y] + 1;
+                    q.push({tx, ty});
+                }
+                tx = x - 1;
+                ty = y - 1;
+                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
+                    b[tx][ty] = b[x][y] + 1;
+                    q.push({tx, ty});
+                }
+            }
+        }
+    }
+    cout << "-1\n";
+    return 0;
 }
