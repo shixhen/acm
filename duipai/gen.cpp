@@ -20,22 +20,23 @@ int main() {
     uniform_int_distribution<int> dist(1, 30);
     uniform_int_distribution<int> first_dist(1, 100);
     uniform_int_distribution<int> dist2(1, 100);
-    int t = 3;
+    int t = 500;
     cout << t << "\n";
     //int cnt[11] = {0};
     for (int i = 1; i <= t; i++) {
-        int n = dist(rnd);
-        vector<int> a(n);
+        int n = i;
         cout << n << "\n";
-        int first = first_dist(rnd);
-        a[0] = first;
-        for (int j = 1; j < n; j++) {
-            int delta = dist2(rnd);
-            a[j] = a[j - 1] + delta;
-        }
-        for (int j = 0; j < n; j++) {
-            cout << a[j] << (j == n - 1 ? "\n" : " ");
-        }
+        // vector<int> a(n);
+        // cout << n << "\n";
+        // int first = first_dist(rnd);
+        // a[0] = first;
+        // for (int j = 1; j < n; j++) {
+        //     int delta = dist2(rnd);
+        //     a[j] = a[j - 1] + delta;
+        // }
+        // for (int j = 0; j < n; j++) {
+        //     cout << a[j] << (j == n - 1 ? "\n" : " ");
+        // }
     }
 
     return 0;
