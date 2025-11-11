@@ -9,14 +9,14 @@ int a[105][300];
 int b[105][300];
 
 bool check(int x, int y) {
-    if (x <= 0 || x > n || y <= 0 || y > 2 * x - 1 || b[x][y] > 0) return false;
+    if (x <= 0 || x > n || y <= 0 || y > 2 * x - 1) return false;
     return true;
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-
+    memset(b, 0x3f, sizeof(b));
     cin >> n;
     for (int i = 1; i <= n; i++) {
         for (int j = 1, x; j <= 2 * i - 1; j++) {
@@ -41,25 +41,26 @@ int main() {
         if (x % 2) {
             tx = x;
             ty = y + 1;
-            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 3) % 4) {
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 3) % 4 && b[tx][ty] > b[x][y] + 1) {
                 b[tx][ty] = b[x][y] + 1;
                 q.push({tx, ty});
             }
             ty = y - 1;
-            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 1) % 4) {
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 1) % 4 && b[tx][ty] > b[x][y] + 1) {
                 b[tx][ty] = b[x][y] + 1;
                 q.push({tx, ty});
             }
             if (a[x][y] % 2) {
                 tx = x + 1;
                 ty = y + 1;
-                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
+                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4 && b[tx][ty] > b[x][y] + 1) {
                     b[tx][ty] = b[x][y] + 1;
                     q.push({tx, ty});
                 }
-                tx = x - 1;
-                ty = y - 1;
-                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
+            } else {
+              tx = x - 1;
+              ty = y - 1;
+                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4 && b[tx][ty] > b[x][y] + 1) {
                     b[tx][ty] = b[x][y] + 1;
                     q.push({tx, ty});
                 }
@@ -68,12 +69,12 @@ int main() {
             tx = x;
             ty = y + 1;
 
-            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 1) % 4) {
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 1) % 4 && b[tx][ty] > b[x][y] + 1) {
                 b[tx][ty] = b[x][y] + 1;
                 q.push({tx, ty});
             }
             ty = y - 1;
-            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 3) % 4) {
+            if (check(tx, ty) && a[tx][ty] == (a[x][y] + 3) % 4 && b[tx][ty] > b[x][y] + 1) {
                 b[tx][ty] = b[x][y] + 1;
                 q.push({tx, ty});
             }
@@ -81,16 +82,18 @@ int main() {
                 tx = x + 1;
                 ty = y + 1;
 
-                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
+                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4 && b[tx][ty] > b[x][y] + 1) {
                     b[tx][ty] = b[x][y] + 1;
                     q.push({tx, ty});
                 }
-                tx = x - 1;
-                ty = y - 1;
-                if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4) {
-                    b[tx][ty] = b[x][y] + 1;
-                    q.push({tx, ty});
-                }
+                
+            } else {
+              tx = x - 1;
+              ty = y - 1;
+              if (check(tx, ty) && a[tx][ty] == (a[x][y] + 2) % 4 && b[tx][ty] > b[x][y] + 1) {
+                  b[tx][ty] = b[x][y] + 1;
+                  q.push({tx, ty});
+              }
             }
         }
     }
