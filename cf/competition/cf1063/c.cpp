@@ -52,7 +52,6 @@ void solve() {
         if (r <= n) {
             sum += n - r + 1;
         }
-        //cout << i << " " << r << " " << n << "\n";
     }
     cout << sum << "\n";
     return;
