@@ -45,7 +45,6 @@ void work() {
         if (op == "!") {
             break;
         }
-
         if (op == "?" && q <= 0) {
             quitf(_wa, "Too many queries, it should be at most %d [testcase %d]", n, cnt);
         }
