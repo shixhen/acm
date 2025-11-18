@@ -20,8 +20,8 @@ void solve() {
     sort(b.begin() + 1, b.end());
     int q;
     cin >> q;
-    map<int, vector<int>> mp;
-    vector<int> ans(q + 1);
+    map<long long, vector<int>> mp;
+    vector<long long> ans(q + 1);
     for (int i = 1; i <= q; i++) {
         cin >> ans[i];
         mp[ans[i]].push_back(i); 

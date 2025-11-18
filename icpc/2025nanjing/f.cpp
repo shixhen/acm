@@ -33,7 +33,7 @@ void solve() {
     }
     char op;
     int u, v, w;
-    int sum = 0;
+    long long sum = 0;
     while (T--) {
         cin >> op;
         if (op == '+') {
