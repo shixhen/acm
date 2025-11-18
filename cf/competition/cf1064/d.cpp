@@ -39,6 +39,5 @@ int main() {
     while (_--) {
         solve();
     }
-
     return 0;
 }
