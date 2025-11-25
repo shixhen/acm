@@ -1,36 +1,32 @@
 #include <bits/stdc++.h>
- 
-using namespace std;
- 
-void solve() {
-    int n;
-    cin >> n;
-    int p = 1;
-    deque<int> ans;
-    for (int i = 1; i <= n; i++) {
-        if (p % 2 == 0) {
-            ans.push_back(i);
-        } else {
-            ans.push_front(i);
-        }
-        if (i % 4) {
-            p = 1 - p;
-        }
-    }
-    for (auto &x : ans) {
-        cout << x << " ";
-    }
-    cout << "\n";
-    return;
-}
- 
+using std::string;
+constexpr int N = 1005;
+
+int data[N];
+
+int front = 0, rear = 0;
+
+class AnimalShelf {
+public:
+	void enqueue(int number, string type);
+	
+	void dequeueAny(int* number, string* type);
+
+	int dequeueDog;
+	
+	int dequeueCat;
+};
+
+
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0), cout.tie(0);
-    int _;
-    cin >> _;
-    while (_--) {
-        solve();
-    }
+    // 入队操作
+    auto push = [&](int x) { data[rear++] = x; };
+    // 取队头元素
+    auto get_front = [&]() { return (front < rear ? data[front] : -1); };
+    // 出队操作
+    auto pop = [&]() { if (front < rear) front++; };
+    // 判空操作
+    auto empty = [&]() { return front == rear; };
+    
     return 0;
 }
