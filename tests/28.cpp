@@ -12,9 +12,9 @@ public:
 	
 	void dequeueAny(int* number, string* type);
 
-	int dequeueDog;
+	int dequeueDog();
 	
-	int dequeueCat;
+	int dequeueCat();
 };
 
 
