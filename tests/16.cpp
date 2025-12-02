@@ -1,49 +1,50 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 
-int a[7];
-double b[7];
+void solve() {
+    int x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
 
-double get_ans(int x) {
-    for (int i = 1; i <= 6; i++) {
-        b[i] = 0.0;
-        if (a[i] == x) {
-            b[i] = a[i];
+    int dx = abs(x1 - x2);
+    int dy = abs(y1 - y2);
+    if ((x1 == 1 && y1 == 1) || (x1 == 1 && y1 == 10) || (x1 == 9 && y1 == 1) || (x1 == 9 && y1 == 10)) {
+        if ((dx == 1 && dy == 1) || (dy == 2 && dx == 2)) {
+            cout << "YES\n";
+            return;
         }
     }
-    double sum = 0;
-    for (int i = 1; i <= 6; i++) {
-        sum += b[i];
+    int tx = min(abs(x1 - 1), abs(x1 - 9));
+    int ty = min(abs(y1 - 1), abs(y1 - 10));
+    if (tx <= 1 && ty <= 1) {
+        if ((dy == 2 && dx == 2)) {
+            cout << "YES\n";
+            return;
+        }
     }
-    sum /= 6;
-    for (int i = 1; i <= 6; i++) {
-        b[i] = max(b[i], sum);
+    if (dx == 0 || dy == 0) {
+        if (dx == 1 || dy == 1) {
+            if (x1 == 1 || x1 == 9 || y1 == 1 || y1 == 10) {
+                cout << "YES\n";
+                return;
+            }
+            
+        }
     }
-    sum = 0;
-    for (int i = 1; i <= 6; i++) {
-        sum += b[i];
-    }
-    sum /= 6;
-    for (int i = 1; i <= 6; i++) {
-        b[i] = max(b[i], sum);
-    }
-    sum = 0;
-    for (int i = 1; i <= 6; i++) {
-        sum += b[i];
-    }
-    return sum / 6.0;
+    cout << "NO\n";
+    return;
 }
 
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0), cout.tie(0);
-    for (int i = 1; i <= 6; i++) cin >> a[i];
-    double ans = 0;
-    for (int i = 1; i <= 6; i++) {
-        ans = max(ans, get_ans(6));
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int T;
+    if (cin >> T) {
+        while (T--) {
+            solve();
+        }
     }
-    ans *= 5.0;
-    cout << fixed << setprecision(10) << ans << "\n";
     return 0;
 }
