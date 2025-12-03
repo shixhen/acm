@@ -21,7 +21,7 @@ void solve() {
         if ((dy == 2 && dx == 2)) {
             cout << "YES\n";
             return;
-        }
+        } 
     }
     if (dx == 0 || dy == 0) {
         if (dx == 1 || dy == 1) {

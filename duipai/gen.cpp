@@ -17,26 +17,23 @@ using namespace std;
 
 int main() {
     mt19937 rnd(random_device{}());
-    uniform_int_distribution<int> dist(1, 30);
+    uniform_int_distribution<int> dist(2, 20);
     uniform_int_distribution<int> first_dist(1, 100);
-    uniform_int_distribution<int> dist2(1, 100);
-    int t = 500;
+    int t = 10;
     cout << t << "\n";
     //int cnt[11] = {0};
     for (int i = 1; i <= t; i++) {
-        int n = i;
-        cout << n << "\n";
-        // vector<int> a(n);
-        // cout << n << "\n";
-        // int first = first_dist(rnd);
-        // a[0] = first;
-        // for (int j = 1; j < n; j++) {
-        //     int delta = dist2(rnd);
-        //     a[j] = a[j - 1] + delta;
-        // }
-        // for (int j = 0; j < n; j++) {
-        //     cout << a[j] << (j == n - 1 ? "\n" : " ");
-        // }
+        int n = dist(rnd);
+        int m = dist(rnd);
+        cout << n << " " << m << "\n";
+        vector<int> a(n);
+        for (int i = 1; i < n; i++) {
+            uniform_int_distribution<int> dist2(0, a[i - 1] + 1);
+            a[i] = dist2(rnd);
+        }
+        for (int i = 0; i < n; i++) {
+            cout << a[i] << (i == n - 1 ? "\n" : " ");
+        }
     }
 
     return 0;

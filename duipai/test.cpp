@@ -2,37 +2,63 @@
 
 using namespace std;
 
+constexpr int N = 1e5 + 5;
+constexpr long long mod = 998244353;
+
+int f[N];
+
+int find(int x) {
+    return f[x] == x ? x : f[x] = find(f[x]);
+}
+
 void solve() {
-    int n;
-    cin >> n;
-    long long x;
-    vector<pair<long long, int>> a(n + 1);
-    for (int i = 1; i <= n; i++) {
-        cin >> x;
-        a[i] = {x, i};
+    int n, m;
+    cin >> n >> m;
+    for (int i = 0; i <= n; i++) {
+        f[i] = i;
     }
-    sort(a.begin() + 1, a.end());
-    int r = 0;
-    vector<long long> dp(n + 1);
-    long long ans = 0;
-    for (int i = 1; i <= n; i++) {
-        if (i < n && a[i].first == a[i + 1].first) {
-            a[i + 1].second = max(a[i + 1].second, a[i].second);
-            continue;
+    vector<int> a(n);
+    vector<int> d(n);
+    for (auto &x : a) cin >> x;
+    if (a[0] != 0) {
+        cout << "0\n";
+        return;
+    }
+    for (int i = 1; i < n; i++) {
+        if (a[i] > a[i - 1] + 1) {
+            cout << "0\n";
+            return;
         }
-        if (a[i].second < r) continue;
-        r = a[i].second;
-        long long k = ans;
-        long long t = ans + 1;
-        while (k && k + (a[i].first - 1ll) / dp[k] + 1 - 1 <= ans + 1) {
-            t = min(t, k + (a[i].first - 1ll) / dp[k] + 1 - 1);
-            if (t == ans) break;
-            k--;
+        int j = a[i - 1];
+        set<int> s;
+        while (j && j >= a[i]) {
+            s.insert(find(j));
+            j = a[j - 1];
         }
-        if (t == ans + 1) {
-            ans++;
-            dp[ans] = a[i].first;
+        if (a[i]) j++;
+        if (a[i] != j) {
+            cout << "0\n";
+            return;
         }
+        if (j) {
+            if (s.count(find(j - 1))) {
+                cout << "0\n";
+                return;
+            }
+            f[i] = find(j - 1);
+        } else {
+            s.insert(0);
+            d[i] = s.size();
+        }
+    }
+    long long ans = 1;
+    for (int i = 0; i < n; i++) {
+        if (find(i) != i) continue;
+        if (d[i] >= m) {
+            cout << "0\n";
+            return;
+        }
+        ans = ans * (m - d[i]) % mod;
     }
     cout << ans << "\n";
     return;
@@ -46,5 +72,6 @@ int main() {
     while (_--) {
         solve();
     }
+
     return 0;
 }

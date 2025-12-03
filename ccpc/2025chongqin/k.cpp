@@ -41,7 +41,7 @@ void solve() {
             return;
         }
         if (j) {
-            if (s.count(j - 1)) {
+            if (s.count(find(j - 1))) {
                 cout << "0\n";
                 return;
             }
@@ -51,24 +51,24 @@ void solve() {
             d[i] = s.size();
         }
     }
-    vector<int> b(n);
-    vector<int> c(n);
-    for (int i = 0; i < n; i++) {
-        b[i] = find(i);
-    }
-    for (int i = 1, j = 0; i < n; i++) {
-        while (j && b[j] != b[i]) {
-            j = c[j - 1];
-        }
-        if (b[j] == b[i]) j++;
-        c[i] = j;
-    }
-    for (int i = 0; i < n; i++)  {
-        if (c[i] != a[i]) {
-            cout << "0\n";
-            return;
-        }
-    }
+    // vector<int> b(n);
+    // vector<int> c(n);
+    // for (int i = 0; i < n; i++) {
+    //     b[i] = find(i);
+    // }
+    // for (int i = 1, j = 0; i < n; i++) {
+    //     while (j && b[j] != b[i]) {
+    //         j = c[j - 1];
+    //     }
+    //     if (b[j] == b[i]) j++;
+    //     c[i] = j;
+    // }
+    // for (int i = 0; i < n; i++)  {
+    //     if (c[i] != a[i]) {
+    //         cout << "0\n";
+    //         return;
+    //     }
+    // }
     long long ans = 1;
     for (int i = 0; i < n; i++) {
         if (find(i) != i) continue;
