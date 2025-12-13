@@ -2,7 +2,7 @@
 
 using namespace std;
 
-constexpr int N = 1e5 + 5;
+constexpr int N = 5e5 + 5;
 
 struct Node {
     int l;
@@ -136,8 +136,6 @@ long long query_hmax(int p, int s, int t) {
 }
 
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0), cout.tie(0);
     int n, m;
     cin >> n >> m;
     build(1, 1, n);
@@ -146,14 +144,17 @@ int main() {
     while (m--) {
         cin >> op;
         cin >> x >> y;
-        x++;
-        y++;
         if (op == 1) {
             cin >> k;
             update(1, x, y, k);
         } else if (op == 2) {
-            cout << query_max(1, x, y) << "\n";
+            cin >> k;
+            cout << "-1\n";
         } else if (op == 3) {
+            cout << query_sum(1, x, y) << "\n";
+        } else if (op == 4) {
+            cout << query_max(1, x, y) << "\n";
+        } else if (op == 5) {
             cout << query_hmax(1, x, y) << "\n";
         }
     }
