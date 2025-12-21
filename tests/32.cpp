@@ -12,7 +12,7 @@ struct Node {
     long long val;
 
     long long maxn;
-    long long hmax;
+    long long hmx;
 
     long long lazy;
     long long hlazy;
@@ -32,7 +32,7 @@ void build(int p, int l, int r) {
     if (l == r) {
         cin >> seg[p].val;
         seg[p].maxn = seg[p].val;
-        seg[p].hmax = seg[p].val;
+        seg[p].hmx = seg[p].val;
         return;
     }
     int mid = (l + r) >> 1;
@@ -40,7 +40,7 @@ void build(int p, int l, int r) {
     build(p << 1 | 1, mid + 1, r);
     seg[p].val = seg[p << 1].val + seg[p << 1 | 1].val;
     seg[p].maxn = max(seg[p << 1].maxn, seg[p << 1 | 1].maxn);
-    seg[p].hmax = seg[p].maxn;
+    seg[p].hmx = seg[p].maxn;
 }
 
 void push_down(int p) {
@@ -49,8 +49,8 @@ void push_down(int p) {
     seg[p << 1].val += seg[p].lazy * seg[p << 1].len;
     seg[p << 1 | 1].val += seg[p].lazy * seg[p << 1 | 1].len;
 
-    seg[p << 1].hmax = max(seg[p << 1].hmax, seg[p << 1].maxn + seg[p].hlazy);
-    seg[p << 1 | 1].hmax = max(seg[p << 1 | 1].hmax, seg[p << 1 | 1].maxn + seg[p].hlazy);
+    seg[p << 1].hmx = max(seg[p << 1].hmx, seg[p << 1].maxn + seg[p].hlazy);
+    seg[p << 1 | 1].hmx = max(seg[p << 1 | 1].hmx, seg[p << 1 | 1].maxn + seg[p].hlazy);
 
     seg[p << 1].maxn += seg[p].lazy;
     seg[p << 1 | 1].maxn += seg[p].lazy;
@@ -71,7 +71,7 @@ void update(int p, int s, int t, long long v) {
         seg[p].maxn += v;
         seg[p].lazy += v;
         seg[p].hlazy = max(seg[p].hlazy, seg[p].lazy);
-        seg[p].hmax = max(seg[p].hmax, seg[p].maxn);
+        seg[p].hmx = max(seg[p].hmx, seg[p].maxn);
         return;
     }
     push_down(p);
@@ -84,7 +84,7 @@ void update(int p, int s, int t, long long v) {
     }
     seg[p].val = seg[p << 1].val + seg[p << 1 | 1].val;
     seg[p].maxn = max(seg[p << 1].maxn, seg[p << 1 | 1].maxn);
-    seg[p].hmax = max(seg[p << 1].hmax, seg[p << 1 | 1].hmax);
+    seg[p].hmx = max(seg[p << 1].hmx, seg[p << 1 | 1].hmx);
 }
 
 long long query_sum(int p, int s, int t) {
@@ -121,7 +121,7 @@ long long query_max(int p, int s, int t) {
 
 long long query_hmax(int p, int s, int t) {
     if (seg[p].full_cover(s, t)) {
-        return seg[p].hmax;
+        return seg[p].hmx;
     }
     push_down(p);
     int mid = (seg[p].l + seg[p].r) >> 1;

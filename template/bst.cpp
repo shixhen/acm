@@ -11,6 +11,7 @@ struct Node {
     int r;
 } tr[N];
 
+// 回收栈
 Node f_stk[N];
 
 int root = 0, tot = 0, top = 0;
@@ -97,27 +98,13 @@ void inorder(int u) {
 }
 
 void solve() {
+    // 初始化
     root = 0;
     tot = 0;
     top = 0;
     int n;
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        insert(x);
-    }
-    inorder(root);
-    cout << "\n";
-    int m;
-    cin >> m;
-    while (m--) {
-        int x;
-        cin >> x;
-        erase(x);
-        inorder(root);
-        cout << "\n";
-    }
+    
     return;
 }
 
