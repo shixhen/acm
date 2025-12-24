@@ -1,41 +1,81 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-constexpr long long mod = 1e9 + 7;
+typedef long long ll;
+const int MOD = 1e9 + 7;
+const int MAXM = 50000;
+
+ll fact[MAXM + 5];
+ll invFact[MAXM + 5];
+
+ll power(ll base, ll exp) {
+    ll res = 1;
+    base %= MOD;
+    while (exp > 0) {
+        if (exp & 1) res = (res * base) % MOD;
+        base = (base * base) % MOD;
+        exp /= 2;
+    }
+    return res;
+}
+
+ll modInverse(ll n) {
+    return power(n, MOD - 2);
+}
+
+void precompute() {
+    fact[0] = 1;
+    for (int i = 1; i <= MAXM + 2; i++) {
+        fact[i] = (fact[i - 1] * i) % MOD;
+    }
+}
+
+void solve() {
+    ll x;
+    cin >> x;
+    if (x <= 2) {
+        cout << x << endl;
+        return;
+    }
+
+    ll l = 2, r = MAXM, m = 2;
+    while (l <= r) {
+        ll mid = l + (r - l) / 2;
+        if ((mid + 2) * (mid - 1) / 2 <= x) {
+            m = mid;
+            l = mid + 1;
+        } else {
+            r = mid - 1;
+        }
+    }
+
+    ll sum = (m + 2) * (m - 1) / 2;
+    ll rem = x - sum;
+    ll ans;
+
+    if (rem == m) {
+        ans = (fact[m] * modInverse(2)) % MOD;
+        ans = (ans * (m + 2)) % MOD;
+    } else {
+        ans = fact[m];
+        ll removed = m - rem + 1;
+        ans = (ans * modInverse(removed)) % MOD;
+        ans = (ans * (m + 1)) % MOD;
+    }
+
+    cout << ans << endl;
+}
 
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0), cout.tie(0);
-    int _;
-    cin >> _;
-    while (_--) {
-        long long n;
-        cin >> n;
-        if (n < 5) {
-            cout << n << "\n";
-            continue;
-        }
-        vector<long long> ans;
-        int p = 2;
-        while (n >= p) {
-            ans.push_back(p);
-            n -= p;
-            p++;
-        }
-        if (n >= ans.size()) {
-            ans[0] += n;
-        } else {
-            for (int i = ans.size() - 1; i >= ans.size() - n; i--) {
-                ans[i]++;
-            }
-        }
-        long long x = 1;
-        for (auto &v : ans) {
-            x = (x * v) % mod;
-        }
-        cout << x << "\n";
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    precompute();
+    int T;
+    cin >> T;
+    while (T--) {
+        solve();
     }
-    
     return 0;
 }
