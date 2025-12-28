@@ -11,14 +11,14 @@ struct Node {
     int r;
 } tr[N];
 
-Node f_stk[N];
+int f_stk[N];
 
 int root = 0, tot = 0, top = 0;
 
 int newNode(int x) {
     if (top) {
-        tr[f_stk[--top].val] = {x, 0, 0};
-        return f_stk[top].val;
+        tr[f_stk[--top]] = {x, 0, 0};
+        return f_stk[top];
     }
 
     tr[++tot] = {x, 0, 0};
@@ -85,7 +85,7 @@ void erase(int x) {
     }
 
     // 回收节点
-    f_stk[top++].val = cur;
+    f_stk[top++] = cur;
 }
 
 // 中序遍历

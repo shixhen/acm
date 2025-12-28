@@ -36,8 +36,7 @@ void insert(int x) {
     while (cur) {
         fa = cur;
         if (x < tr[cur].val) cur = tr[cur].l;
-        else if (x > tr[cur].val) cur = tr[cur].r;
-        else return;
+        else cur = tr[cur].r;
     }
     if (x < tr[fa].val) tr[fa].l = newNode(x);
     else tr[fa].r = newNode(x);
@@ -63,7 +62,6 @@ void erase(int x) {
 
     // 未找到
     if (!cur) return;
-
     if (tr[cur].l && tr[cur].r) {
         int p = cur, s = tr[cur].r;
         // 寻找右子树的最小值
@@ -89,12 +87,30 @@ void erase(int x) {
     f_stk[top++] = cur;
 }
 
+vector<int> temp;
+
 // 中序遍历
 void inorder(int u) {
     if (!u) return;
     inorder(tr[u].l);
-    cout << tr[u].val << " ";
+    temp.push_back(tr[u].val);
     inorder(tr[u].r);
+}
+
+// 前序遍历
+void preorder(int u) {
+    if (!u) return;
+    temp.push_back(tr[u].val);
+    preorder(tr[u].l);
+    preorder(tr[u].r);
+}
+
+// 后序遍历
+void postorder(int u) {
+    if (!u) return;
+    postorder(tr[u].l);
+    postorder(tr[u].r);
+    temp.push_back(tr[u].val);
 }
 
 void solve() {
@@ -104,6 +120,25 @@ void solve() {
     top = 0;
     int n;
     cin >> n;
+    for (int i = 0, x; i < n; i++) {
+        cin >> x;
+        insert(x);
+    }
+    preorder(root);
+    for (int i = 0; i < (int)temp.size(); i++) {
+        cout << temp[i] << (i == (int)temp.size() - 1 ? '\n' : ' ');
+    }
+    temp.clear();
+    inorder(root);
+    for (int i = 0; i < (int)temp.size(); i++) {
+        cout << temp[i] << (i == (int)temp.size() - 1 ? '\n' : ' ');
+    }
+    temp.clear();
+    postorder(root);
+    for (int i = 0; i < (int)temp.size(); i++) {
+        cout << temp[i] << (i == (int)temp.size() - 1 ? '\n' : ' ');
+    }
+    temp.clear();
     return;
 }
 
@@ -114,6 +149,7 @@ int main() {
     cin >> _;
     while (_--) {
         solve();
+        if (_) cout << "\n";
     }
     return 0;
 }
