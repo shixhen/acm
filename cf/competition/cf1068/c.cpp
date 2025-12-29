@@ -19,7 +19,6 @@ void solve() {
             b.push_back(a[i]);
             for (int j = a[i]; j <= k; j += a[i]) {
                 if (!s.count(j)) {
-                    //cout << j << "\n";
                     cout << "-1\n";
                     return;
                 }
@@ -34,7 +33,6 @@ void solve() {
     cout << "\n";
     return;
 }
-
 
 int main() {
     int _;

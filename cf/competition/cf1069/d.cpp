@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 void solve() {
     int n, k;
     cin >> n >> k;
@@ -16,7 +15,7 @@ void solve() {
     vector<vector<int>> dp(k + 2, vector<int>(k + 2));
     for (int i = 1; i <= n; i++) {
         if (a[i] == a[i - 1]) continue;
-        for (int j = a[i - 1]; j <= a[i]; j++) {
+        for (int j = a[i - 1] + 1; j <= a[i]; j++) {
             for (int s = j; s <= k; s++) {
                 for (int m = 0; m < j; m++) {
                     dp[j][s] = max(dp[j][s], dp[m][s - j] + (n - i + 1) * (j - m));
@@ -25,9 +24,6 @@ void solve() {
             }
         }
     }
-    // for (int i = 0; i <= k; i++) {
-    //     cout << i << " " << dp[i][0] << " " << dp[i][1] << " " << dp[i][2] << "\n";
-    // }
     cout << ans << "\n";
     return;
 }
@@ -38,6 +34,5 @@ int main() {
     while (_--) {
         solve();
     }
-
     return 0;
 }
