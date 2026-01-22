@@ -49,10 +49,6 @@ void solve() {
                 }
             }
         }
-        // for (int j = 1; j <= m; j++) {
-        //     cout << ndp[j] << " ";
-        // }
-        // cout << "\n";
     }
     int ans = 0;
     for (auto i : ndp) {
@@ -63,7 +59,6 @@ void solve() {
     return;
 }
 
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -73,7 +68,5 @@ int main() {
     while (_--) {
         solve();
     }
-
-
     return 0;
 }
