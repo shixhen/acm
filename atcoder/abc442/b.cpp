@@ -19,7 +19,7 @@ int main() {
             val--;
             val = max(val, 0);
         } else {
-            f = 1- f;
+            f = 1 - f;
         }
         if (f == 1 && val >= 3) {
             cout << "Yes\n";

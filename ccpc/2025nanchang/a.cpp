@@ -2,8 +2,10 @@
 
 using namespace std;
 
-void solve() {
-    
+void solve() { 
+    long long n, k;
+    cin >> n >> k;
+    cout << (n - 1) * k + 1 << "\n";
     return;
 }
 
@@ -15,5 +17,7 @@ int main() {
     while (t--) {
         solve();
     }
+
+
     return 0;
 }
