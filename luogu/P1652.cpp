@@ -249,14 +249,31 @@ vector<Point> get_convex_hull(vector<Point> &p) {
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-
-    // 示例：求凸包
     int n;
-    // cin >> n;
-    vector<Point> points;
-    // for(int i=0; i<n; i++) { double x, y; cin >> x >> y; points.emplace_back(x, y); }
-    
-    // vector<Point> hull = get_convex_hull(points);
+    cin >> n;
+    vector<int> cx(n), cy(n), r(n);
+    for (auto &x : cx) {
+        cin >> x;
+    }
+    for (auto &x : cy) {
+        cin >> x;
+    }
+    for (auto &x : r) {
+        cin >> x;
+    }
+    int x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+    Point p1(x1, y1), p2(x2, y2);
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+        Point c(cx[i], cy[i]);
+        double dist1 = (c - p1).len();
+        double dist2 = (c - p2).len();
+        if ((dcmp(dist1 - r[i]) < 0 && dcmp(dist2 - r[i]) > 0) || (dcmp(dist1 - r[i]) > 0 && dcmp(dist2 - r[i]) < 0)) {
+            ans++;
+        }
+    }
+    cout << ans << "\n";
     
     return 0;
 }
