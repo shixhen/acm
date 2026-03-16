@@ -2,8 +2,13 @@
 
 using namespace std;
 
+const double PI = acos(-1);
 void solve() {
-    
+    int d;
+    cin >> d;
+    double r = d / 2.0;
+    double area = PI * r * r;
+    cout << fixed << setprecision(10) << area << "\n";
     return;
 }
 
