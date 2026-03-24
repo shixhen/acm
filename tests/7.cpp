@@ -102,6 +102,15 @@ void simulate(int totalFloors, int criticalFloor) {
 
 // ==================== 主函数 ====================
 
+
+int fac(int x) {
+    int res = 1;
+    for (int i = 1; i <= x; i++) {
+        res *= i;
+    }
+    return res;
+}
+
 int main() {
     // int floors = 100;
 
@@ -131,10 +140,12 @@ int main() {
     //     simulate(floors, cf);
     //     cout << "\n";
     // }
-    minDrops(10, 100);
-    int n, m;
-    while (cin >> n >> m) {
-        cout << dp[m][n] << "\n";
+    minDrops(100, 100);
+    for (int i = 1; i <= 100; i++) {
+        // if (dp[2][i] > ceil((sqrt(2 * i)))) {
+        //     cout << dp[3][i] << " " << (int) sqrt(2 * i) << "\n";
+        // }
+        cout << dp[3][i] << " " << (int) pow(fac(3) * i, 1.0 / 3.0) << "\n";
     }
 
     return 0;
