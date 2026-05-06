@@ -1,15 +1,5 @@
 #include <bits/stdc++.h>
-<<<<<<< HEAD
 
-using namespace std;
-
-
-int main() {
-    string s;
-    getline(cin, s);
-    cout << s.substr(0, 5) << endl;
-    return 0;
-=======
 using namespace std;
 using ll = long long;
 const int mod = 998244353;
@@ -89,5 +79,4 @@ int main() {
 	}
 	cout<<ans;
 	return 0;
->>>>>>> 72c8a7564b12082d3a339384fb7deab4800507b9
 }
