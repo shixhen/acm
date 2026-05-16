@@ -8,7 +8,9 @@ int main() {
     int n, m;
     cin >> n >> m;
     int u, v, w;
-    
+    for (int i = 0; i < m; i++) {
+        
+    }
 
 
     return 0;
